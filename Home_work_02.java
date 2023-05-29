@@ -5,7 +5,7 @@ import java.util.Random;
 public class Home_work_02 {
     public static void main(String[] args) {
 
-        int[] array = CreateArray(10, 0, 100);
+        int[] array = CreateArray(10, -20, 20);
         printArray(array);
         System.out.println();
         heapSort(array); 
@@ -29,17 +29,17 @@ public class Home_work_02 {
     public static void heapSort (int[] array) {
         int size = array.length;
         for (int i = size / 2 - 1; i >= 0; i--) {
-            heapify(array, i, size); // отвечает за построение дерева. Нулевой элемент будет самый максимальный
+            maxNumberInHeap(array, i, size); // отвечает за построение дерева. Нулевой элемент будет самый максимальный
         }
         for (int j = size - 1; j >= 0; j--) { // делаем саму сортировку 
             int temp = array[j];   
             array[j] = array[0]; // на последний элемент ставим наш максимальный элемент
             array[0] = temp; // а на нулевой элемент ставим тот, который стоял на последнем элементе
-            heapify(array, 0, j);
+            maxNumberInHeap(array, 0, j);
         }
     }
 
-    public static void heapify (int[] array, int i, int size) {
+    public static void maxNumberInHeap (int[] array, int i, int size) {
         int left = 2 * i + 1; // устанавливаем левого наследника
         int right = 2 * i + 2; // устанавливаем правого наследника
         int largest = i; // устанавливаем максимальное значение и пока приравниваем к родителю
@@ -53,7 +53,7 @@ public class Home_work_02 {
             int temp = array[i];
             array[i] = array[largest];
             array[largest] = temp;
-            heapify(array, largest, size); // и запускаем проверку, чтобы если есть дети детей, то тоже поменялись 
+            maxNumberInHeap(array, largest, size); // и запускаем проверку, чтобы если есть дети детей, то тоже поменялись 
         }
     }
 }
